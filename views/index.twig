@@ -180,7 +180,7 @@
         {% for projet in datas %}
         <div class="card" >
           <div class="box">
-            <img src="{{ projet.image }}" onclick="openModal('{{ projet.title }}')" alt="">
+            <img src="{{ projet.image }}" onclick="openModal('{{ projet.title }}','{{ projet.description }}','{{ projet.techno }}','{{ projet.link }}')" alt="">
             <div class="text">
               <h3>{{ projet.title }}</h3>
             </div>

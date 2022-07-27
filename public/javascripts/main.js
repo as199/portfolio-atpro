@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $(window).scroll(function () {
         // sticky navbar on scroll script
@@ -81,17 +82,18 @@ const modal = document.getElementById("myModal");
 
 /**
  *
- * @param  data
+ * @param title
+ * @param description
+ * @param techno
  */
-function openModal(data) {
-    console.log(data);
-    let lien = data.link === "" ? "#" : data.link;
-    document.getElementById("titre").innerText = data.title;
-    document.getElementById("description").innerText = data.description;
+function openModal(title, description, techno, link) {
+    let lien = link === "" ? "#" : link;
+    document.getElementById("titre").innerText = title;
+    document.getElementById("description").innerText = description;
     $("#technologie").children("button").remove();
     $("#liens").children("a").remove();
-    $("#liens").append("<a href=" + lien + " target='_blank'>" + data.link + "</a>");
-    let technos = data.techno.split(",");
+    $("#liens").append("<a href=" + lien + " target='_blank'>" + link + "</a>");
+    let technos = techno.split(",");
     $.each(technos, function (index, item) {
         $("#technologie").append(
             "<button  id='badge'>" + item + "</button>"
