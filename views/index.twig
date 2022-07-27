@@ -1,6 +1,292 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-  <h1>{{title}}</h1>
-  <p>Welcome to {{title}} portfolio</p>
+  <div class="scroll-up-btn">
+    <i class="fas fa-angle-up"></i>
+  </div>
+  <nav class="navbar sticky">
+    <div class="max-width">
+      <div class="logo"><a href="#" id="portfolio">Portfo<span style="color: #000000">lio</span></a></div>
+      <ul class="menu">
+        <li><a href="#home" class="menu-btn">Home</a></li>
+        <li><a href="#about" class="menu-btn">About</a></li>
+        <li><a href="#services" class="menu-btn">Services</a></li>
+        <li><a href="#skills" class="menu-btn">Skills</a></li>
+        <li><a href="#projects" class="menu-btn">Projects</a></li>
+        <li><a href="#contact" class="menu-btn">Contact</a></li>
+      </ul>
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- home section start -->
+  <section class="home" id="home">
+    <div class="max-width">
+      <div class="home-content">
+        <div class="text-1">Hello, my name is</div>
+        <div class="text-2">Assane Dione</div>
+        <div class="text-3">And I'm a <span class="typing"></span></div>
+        <a href="#">Hire me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- about section start -->
+  <section class="about" id="about">
+    <div class="max-width">
+      <h2 class="title">About me</h2>
+      <div class="about-content">
+        <div class="column left">
+          <img src="/images/assane.jpg" alt="">
+        </div>
+        <div class="column right">
+          <div class="text">I'm Assane and I'm a <span class="typing-2"></span></div>
+          <p>Experienced developer, passionate about the ICT universe and its growing evolution, I aim to put my skills at the service of a company with an innovative, enthusiastic and daring culture. Thanks to an in-depth training course and a wealth of high-performance professional experience, I became an expert in the design and adaptation of websites and web applications.</p>
+          <a target="_blank" href="https://cvdesignr.com/p/615d2c1b88c76">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- services section start -->
+  <section class="services" id="services">
+    <div class="max-width">
+      <h2 class="title">My services</h2>
+      <div class="serv-content">
+        <div class="card">
+          <div class="box">
+            <i class="fas fa-file-code"></i>
+            <div class="text">WEB APPLICATIONS</div>
+            <p>Management software Custom application development CRM</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <i class="fas fa-mobile"></i>
+            <div class="text">MOBILE APPLICATIONS</div>
+            <p>Android &&
+              IOs</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <i class="fas fa-code"></i>
+            <div class="text">WEB DEVELOPMENT</div>
+            <p>Company sites
+              Company blog
+              E-Commerce
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <i class="fas fa-code"></i>
+            <div class="text">WEBDESIGN</div>
+            <p>Development layout HTML/css
+              Bootstrap and
+              Development themes for Wordpress
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- skills section start -->
+  <section class="skills" id="skills">
+    <div class="max-width">
+      <h2 class="title">My skills</h2>
+      <div class="skills-content">
+        <div class="column right">
+          <div class="bars">
+            <div class="info">
+              <span>HTML/css && Bootstrap</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>JavaScript</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>PHP</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>Python</span>
+              <span>90%</span>
+            </div>
+            <div class="line moyen"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>Flask</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+        </div>
+        <div class="column right">
+
+          <div class="bars">
+            <div class="info">
+              <span>Angular</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>Symfony</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>Laravel</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <div class="bars">
+            <div class="info">
+              <span>Ionic / Kotlin</span>
+              <span>100%</span>
+            </div>
+            <div class="line fort"></div>
+          </div>
+          <a href="https://cvdesignr.com/p/615d2c1b88c76" target="_blank">Read more Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- teams section start -->
+  <section class="teams" id="projects">
+    <div class="max-width">
+      <h2 class="title">My recent projects</h2>
+      <div class="carousel owl-carousel" id="carousel">
+        {% for projet in datas %}
+        <div class="card" >
+          <div class="box">
+            <img src="{{ projet.image }}" onclick="openModal('{{ projet.title }}')" alt="">
+            <div class="text">
+              <h3>{{ projet.title }}</h3>
+            </div>
+            <p>{{ projet.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- contact section start -->
+  <section class="contact" id="contact">
+    <div class="max-width">
+      <h2 class="title">Contact me</h2>
+      <div class="contact-content">
+        <div class="column left">
+          <div class="text">Get in Touch</div>
+          <div class="icons">
+            <div class="row">
+              <i class="fas fa-user"></i>
+              <div class="info">
+                <div class="head">Name</div>
+                <div class="sub-title">Assane Dione</div>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="info">
+                <div class="head">Address</div>
+                <div class="sub-title">Mbour,Thiés, Senegal</div>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fas fa-phone"></i>
+              <div class="info">
+                <div class="head">Phone</div>
+                <div class="sub-title">+221 77 816 36 76</div>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fas fa-envelope"></i>
+              <div class="info">
+                <div class="head">Email</div>
+                <div class="sub-title"><a href="mailto:dioneassane0290@gmail.com">dioneassane0290@gmail.com</a></div>
+              </div>
+            </div>
+            <div class="row">
+              <i class='fab'>&#xf08c;</i>
+              <div class="info">
+                <div class="head">Linked in</div>
+                <div class="sub-title"> <a target="_blank" href="https://www.linkedin.com/in/assane-dione-a1a537179">@assane-dione</a> </div>
+              </div>
+            </div>
+            <div class="row">
+              <i class='fab'>&#xf09b;</i>
+              <div class="info">
+                <div class="head">Github</div>
+                <div class="sub-title"> <a target="_blank" href="https://github.com/as199">@assane-dione</a> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column right">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2032.661805650516!2d-16.978290952184885!3d14.435570818586568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec18a4429ccfda3%3A0xde6643c4545646f0!2sSalon%20D&#39;or!5e1!3m2!1sfr!2ssn!4v1654674757754!5m2!1sfr!2ssn" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="titre">Gestion des notes</h3>
+      <hr>
+      <div class="mt-5">
+        <h3>Description</h3>
+        <p id="description"></p>
+      </div>
+      <hr>
+      <div class="mt-5">
+        <h3>Technologie</h3>
+        <div class="pt-2" id="technologie">
+
+        </div>
+      </div>
+      <hr>
+      <div class="technologie">
+        <h3>Liens </h3>
+        <div class="pt-2" id=liens>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- footer section start -->
+  <footer>
+    <span><span class="far fa-copyright"></span>ATPRO 2021 All rights reserved.</span>
+  </footer>
+  <script>
+    function afficheModal() {
+      alert("Vous avez cliqué sur un projet");
+    }
+  </script>
 {% endblock %}
