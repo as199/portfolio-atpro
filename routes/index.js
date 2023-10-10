@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../database/db');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: './public/images', // Define your image storage folder
+    filename: (req, file, cb) => {
+        cb(null, file.originalname); // Save the original file name
+    },
+});
+const upload = multer({ storage });
 
 
 /* GET home page */
@@ -121,9 +129,83 @@ router.get('/admin-projets', function(req, res, next) {
 });
 
 /**
+ * Get add Project page
+ */
+router.get('/admin-projects-create', function(req, res, next) {
+    if (req.session.user) {
+        const projet = {
+            title: '',
+            techno: '',
+            link: '',
+            description: '',
+            image: ''
+        };
+        res.render('projet/create', { title: 'Atpro', user: req.session.user, projet: projet });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+/**
+ * Get edit Project page
+ */
+router.get('/admin-projects-edit/:id', function(req, res, next) {
+    if (req.session.user) {
+        const id = req.params.id;
+        db.serialize(() => {
+            db.all("SELECT * FROM project WHERE id = ?", [id], (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.render('projet/edit', { title: 'Atpro', user: req.session.user, projet: rows[0] });
+                }
+            });
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+/**
  * Add Project
  */
+router.post('/admin-projects-create', upload.single('image'), (req, res) => {
+    const { title, techno, link, description } = req.body;
+    const imagePath = req.file ? '/images/' + req.file.filename : null;
 
+    // Insert form data into the SQLite database
+    db.run(
+        'INSERT INTO projects (title, techno, link, description, image) VALUES (?, ?, ?, ?, ?)',
+        [title, techno, link, description, imagePath],
+        (err) => {
+            if (err) {
+                res.redirect('/admin-projets?success=0');
+            }
+            res.redirect('/admin-projets?success=1'); // Redirect to a success page or the home page
+        }
+    );
+});
+
+/**
+ * Edit Project
+ */
+router.post('/admin-projects-edit/:id', upload.single('image'), (req, res) => {
+    const { title, techno, link, description } = req.body;
+    const id = req.params.id;
+    const imagePath = req.file ? '/images/' + req.file.filename : null;
+
+    // Insert form data into the SQLite database
+    db.run(
+        'UPDATE projects SET title = ?, techno = ?, link = ?, description = ?, image = ? WHERE id = ?',
+        [title, techno, link, description, imagePath, id],
+        (err) => {
+            if (err) {
+                res.redirect('/admin-projets?success=3');
+            }
+            res.redirect('/admin-projets?success=2'); // Redirect to a success page or the home page
+        }
+    );
+});
 
 
 

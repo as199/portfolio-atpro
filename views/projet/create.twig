@@ -1,4 +1,33 @@
-<form method="post" action="/admin-projects-create" enctype="multipart/form-data">
-    {% include '_form.twig' %}
-    <button type="submit" class="btn btn-success">Valider</button>
-</form>
+
+
+{% extends 'adminLayout.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card overflow-hidden">
+                <div class="card-body pb-4 px-4 pt-4">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <h5 class="fs-5 mb-0">Ajouter un nouveau projet</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <form method="post" action="/admin-projects-create" enctype="multipart/form-data">
+            {% include 'projet/_form.twig' %}
+            <button type="submit" class="btn btn-success">Valider</button>
+        </form>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+

@@ -10,7 +10,7 @@
                             <h5 class="fs-5 mb-0">Liste des projets</h5>
                         </div>
                         <div class="flex-shrink-0 ms-3 mt-1">
-                            <a href="#" class="btn btn-primary btn-sm">Ajouter un
+                            <a href="/admin-projects-create"  class="btn btn-primary btn-sm">Ajouter un
                                 projet</a>
                         </div>
                     </div>
@@ -18,20 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        {% for message in flash %}
-            <div class="alert alert-{{ message.type }}">{{ message.message }}</div>
-        {% endfor %}
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
-
-        {% if success %}
-            <div class="alert alert-success">{{ success }}</div>
-        {% endif %}
-
-    </div>
     <div class="row">
         {% for projet in projects %}
             <div class="col-sm-6 col-xl-3">
@@ -54,4 +41,28 @@
             </div>
         {% endfor %}
     </div>
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openModal(url) {
+        console.log(url)
+        $('#modal .modal-body').load(url);
+        $('#modal').modal('show');
+    }
+
+</script>
 {% endblock %}
+
+
