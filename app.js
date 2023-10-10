@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -18,6 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: '@tpro2023@@',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -28,14 +34,20 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
+app.use((err, req, res, next) => {
+  // Log the error
+  console.error(err);
+
+  // Set locals for error handling
+  res.locals.message = err?.message || 'Internal Server Error';
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
+  // Set the HTTP status code based on the error or default to 500 (Internal Server Error)
+  res.status(err?.status || 500);
+
+  // Render the error page
   res.render('error');
 });
+
 
 module.exports = app;

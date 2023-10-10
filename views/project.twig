@@ -1,0 +1,57 @@
+{% extends 'adminLayout.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card overflow-hidden">
+                <div class="card-body pb-4 px-4 pt-4">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <h5 class="fs-5 mb-0">Liste des projets</h5>
+                        </div>
+                        <div class="flex-shrink-0 ms-3 mt-1">
+                            <a href="#" class="btn btn-primary btn-sm">Ajouter un
+                                projet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for message in flash %}
+            <div class="alert alert-{{ message.type }}">{{ message.message }}</div>
+        {% endfor %}
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="alert alert-success">{{ success }}</div>
+        {% endif %}
+
+    </div>
+    <div class="row">
+        {% for projet in projects %}
+            <div class="col-sm-6 col-xl-3">
+                <div class="card overflow-hidden rounded-2 shadow ">
+                    <div class="position-relative">
+                        <a href="javascript:void(0)"><img src="{{ projet.image }}" style="height: 227px !important;"
+                                                          class="card-img-top rounded-0" alt="..."></a>
+                    </div>
+                    <div class="card-body pt-3 p-4">
+                        <h6 class="fw-semibold fs-4">{{ projet.title }}</h6>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <ul class="list-unstyled d-flex align-items-center mb-0">
+                                <li><a class="me-1 btn btn-sm btn-warning" href="javascript:void(0)">modifier</a></li>
+                                <li><a class="me-1 btn btn-sm btn-primary" href="javascript:void(0)">voir</a></li>
+                                <li><a class="me-1 btn btn-sm btn-danger" href="javascript:void(0)">supprimer</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
