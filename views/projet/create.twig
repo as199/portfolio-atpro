@@ -17,17 +17,53 @@
         </div>
     </div>
 
-    <div class="row">
-        <form method="post" action="/admin-projects-create" enctype="multipart/form-data">
-            {% include 'projet/_form.twig' %}
-            <button type="submit" class="btn btn-success">Valider</button>
-        </form>
-    </div>
+    <form method="post" class="row gap-1" action="/admin-projects-create" enctype="multipart/form-data">
+        {% include 'projet/_form.twig' %}
+        <button type="submit" class="btn btn-success">Valider</button>
+    </form>
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputElement = document.getElementById('chips-input');
+            const chipsContainer = document.querySelector('.chips-container');
 
+            inputElement.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && inputElement.value.trim() !== '') {
+                    e.preventDefault();
 
+                    const chipValue = inputElement.value.trim();
 
+                    // Create a chip element
+                    const chipElement = document.createElement('div');
+                    chipElement.classList.add('chip', 'badge', 'bg-primary');
 
+                    // Create a span element to display the chip text
+                    const chipText = document.createElement('span');
+                    chipText.textContent = chipValue;
+
+                    // Create a span element for the remove icon (Font Awesome)
+                    const removeIcon = document.createElement('span');
+                    removeIcon.classList.add('chip-remove-icon', 'ml-1');
+                    removeIcon.innerHTML = '<i class="fas fa-times"></i>';
+
+                    // Add a click event to remove the chip when the remove icon is clicked
+                    removeIcon.addEventListener('click', function () {
+                        chipElement.remove();
+                    });
+
+                    chipElement.appendChild(chipText);
+                    chipElement.appendChild(removeIcon);
+                    chipsContainer.appendChild(chipElement);
+
+                    // Clear the input
+                    inputElement.value = '';
+                }
+            });
+        });
+
+    </script>
 {% endblock %}
 
 

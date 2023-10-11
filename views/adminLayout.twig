@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/stylesheets/styles.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        .chip {
+            display: inline-block;
+            margin: 2px;
+        }
+        .chip-remove-icon {
+            cursor: pointer;
+        }
+
+
+    </style>
+    {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
@@ -27,12 +41,14 @@
     </div>
 </div>
 <script src="/javascripts/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <script src="/javascripts/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/javascripts/sidebarmenu.js"></script>
 <script src="/javascripts/app.min.js"></script>
-<script src="/javascripts/apexcharts/dist/apexcharts.min.js"></script>
-<script src="/javascripts/simplebar/dist/simplebar.js"></script>
-<script src="/javascripts/dashboard.js"></script>
+{% block javascripts %}{% endblock %}
+
+
+
 </body>
 
 </html>

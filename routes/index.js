@@ -172,19 +172,21 @@ router.get('/admin-projects-edit/:id', function(req, res, next) {
 router.post('/admin-projects-create', upload.single('image'), (req, res) => {
     const { title, techno, link, description } = req.body;
     const imagePath = req.file ? '/images/' + req.file.filename : null;
-
+    console.log(req.body, imagePath)
     // Insert form data into the SQLite database
     db.run(
-        'INSERT INTO projects (title, techno, link, description, image) VALUES (?, ?, ?, ?, ?)',
+        'INSERT INTO project (title, techno, link, description, image) VALUES (?, ?, ?, ?, ?)',
         [title, techno, link, description, imagePath],
         (err) => {
             if (err) {
                 res.redirect('/admin-projets?success=0');
+            } else {
+                res.redirect('/admin-projets?success=1'); // Redirect to a success page or the home page
             }
-            res.redirect('/admin-projets?success=1'); // Redirect to a success page or the home page
         }
     );
 });
+
 
 /**
  * Edit Project
@@ -196,17 +198,33 @@ router.post('/admin-projects-edit/:id', upload.single('image'), (req, res) => {
 
     // Insert form data into the SQLite database
     db.run(
-        'UPDATE projects SET title = ?, techno = ?, link = ?, description = ?, image = ? WHERE id = ?',
+        'UPDATE project SET title = ?, techno = ?, link = ?, description = ?, image = ? WHERE id = ?',
         [title, techno, link, description, imagePath, id],
         (err) => {
             if (err) {
                 res.redirect('/admin-projets?success=3');
+            }else{
+                res.redirect('/admin-projets?success=2');
             }
-            res.redirect('/admin-projets?success=2'); // Redirect to a success page or the home page
         }
     );
 });
 
+/**
+ * Delete Project
+ */
+router.get('/admin-projects-delete/:id', function(req, res, next) {
+    const id = req.params.id;
+    db.serialize(() => {
+        db.run("DELETE FROM project WHERE id = ?", [id], (err) => {
+            if (err) {
+               return res.json({ success: false });
+            } else {
+               return  res.json({ success: true });
+            }
+        });
+    });
+});
 
 
 

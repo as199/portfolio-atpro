@@ -1,22 +1,38 @@
 
 
-<div class="mb-3">
-    <label for="titre" class="form-label">Titre</label>
-    <input type="text" name="title" class="form-control" id="titre" value="{{ projet.title }}"  required>
+<div class="col-8">
+    <div class="mb-3">
+        <label for="titre" class="form-label">Titre</label>
+        <input type="text" name="title" class="form-control" id="titre" value="{{ projet.title }}"  required>
+    </div>
+    <div class="mb-3">
+        <label for="techno" class="form-label">Technologie</label>
+        <input type="text" name="techno" class="form-control" id="chips-input" value="{{ projet.techno }}"  required>
+    </div>
+    <div class="mb-3 chips-container">
+
+    </div>
+    <div class="mb-3">
+        <label for="link" class="form-label">Lien vers</label>
+        <input type="text" name="link" class="form-control" id="link" value="{{ projet.link }}"  required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" class="form-control" id="description" cols="30" rows="10"> {{ projet.description }}</textarea>
+    </div>
 </div>
-<div class="mb-3">
-    <label for="techno" class="form-label">Technologie</label>
-    <input type="text" name="techno" class="form-control" id="techno" value="{{ projet.techno }}"  required>
-</div>
-<div class="mb-3">
-    <label for="link" class="form-label">Lien vers</label>
-    <input type="text" name="link" class="form-control" id="link" value="{{ projet.link }}"  required>
-</div>
-<div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea name="description" id="description" cols="30" rows="10"> {{ projet.description }}</textarea>
-</div>
-<div class="mb-3 form-check">
-    <input type="file" class="form-control-file" id="image" name="image">
-    <label class="form-check-label" for="image">Image</label>
+<div class="col">
+    <div class="card mb-4 mb-xl-0 col-12">
+        <div class="card-header">Photo de profil</div>
+        <div class="card-body text-center">
+{#            <input type="file" class="form-control-file" id="image" name="image">#}
+            <!-- Profile picture image-->
+            <img class="img-account-profile rounded-circle mb-2" width="249" height="218" src="{{ projet.image }}" alt="">
+            <!-- Profile picture help block-->
+            <div class="small font-italic text-muted mb-4">JPG ou PNG ne dépassant pas 5 Mo</div>
+            <!-- Profile picture upload button-->
+            <button class="btn btn-primary" type="button">Changer photo de profil</button>
+        </div>
+    </div>
+
 </div>

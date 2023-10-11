@@ -31,9 +31,9 @@
                         <h6 class="fw-semibold fs-4">{{ projet.title }}</h6>
                         <div class="d-flex align-items-center justify-content-between">
                             <ul class="list-unstyled d-flex align-items-center mb-0">
-                                <li><a class="me-1 btn btn-sm btn-warning" href="javascript:void(0)">modifier</a></li>
+                                <li><a class="me-1 btn btn-sm btn-warning" href="/admin-projects-edit/{{ projet.id }}">modifier</a></li>
                                 <li><a class="me-1 btn btn-sm btn-primary" href="javascript:void(0)">voir</a></li>
-                                <li><a class="me-1 btn btn-sm btn-danger" href="javascript:void(0)">supprimer</a></li>
+                                <li><a class="me-1 btn btn-sm btn-danger" href="#" onclick="deleteProject({{ projet.id }})">supprimer</a></li>
                             </ul>
                         </div>
                     </div>
@@ -55,14 +55,53 @@
         </div>
     </div>
 </div>
-<script>
-    function openModal(url) {
-        console.log(url)
-        $('#modal .modal-body').load(url);
-        $('#modal').modal('show');
-    }
 
-</script>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function deleteProject(id) {
+            Swal.fire({
+                title: 'Suppression ?',
+                text: "Vous ne pourrez pas revenir en arrière",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#11e525',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'oui, supprimer le projet !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin-projects-delete/${id}`,
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.success === true) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success',
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                });
+                            }else {
+                                Swal.fire(
+                                    'Erreur !',
+                                    'Une erreur est survenue',
+                                    'error'
+                                )
+                            }
+                        }
+                    });
+
+                }
+            })
+        }
+    </script>
+
 {% endblock %}
 
 
