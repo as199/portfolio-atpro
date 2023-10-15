@@ -14,6 +14,8 @@ const upload = multer({ storage });
 
 /* GET home page */
 router.get('/', function(req, res, next) {
+
+
   db.serialize(() => {
     db.all("SELECT * FROM project", (err, rows) => {
       if (err) {
