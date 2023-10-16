@@ -28,13 +28,13 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET login page */
-router.get('/login', function(req, res, next) {
+router.get('/atpro-folio', function(req, res, next) {
   res.render('login', { title: 'Atpro' });
 });
 
 
 /* POST login */
-router.post('/login', function(req, res, next) {
+router.post('/atpro-folio', function(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -83,7 +83,7 @@ router.post('/register', function(req, res, next) {
             if (err) {
               throw err;
             } else {
-              res.redirect('/login');
+              res.redirect('/atpro-folio');
             }
           });
         }
@@ -100,7 +100,7 @@ router.get('/administration', function(req, res, next) {
   if (req.session.user) {
     res.render('administration', { title: 'Atpro', user: req.session.user });
   } else {
-    res.redirect('/login');
+    res.redirect('/atpro-folio');
   }
 });
 
@@ -127,7 +127,7 @@ router.get('/admin-projets', function(req, res, next) {
       });
     });
   } else {
-    res.redirect('/login');
+    res.redirect('/atpro-folio');
   }
 });
 
@@ -145,7 +145,7 @@ router.get('/admin-projects-create', function(req, res, next) {
     };
     res.render('projet/create', { title: 'Atpro', user: req.session.user, projet: projet });
   } else {
-    res.redirect('/login');
+    res.redirect('/atpro-folio');
   }
 });
 
@@ -165,7 +165,7 @@ router.get('/admin-projects-edit/:id', function(req, res, next) {
       });
     });
   } else {
-    res.redirect('/login');
+    res.redirect('/atpro-folio');
   }
 });
 
